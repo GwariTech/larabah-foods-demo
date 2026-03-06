@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/larabah-foods-demo/(.*)",
+            "destination": "/larabah-foods-demo/index.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
