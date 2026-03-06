@@ -54,7 +54,7 @@ export default function App() {
 
                     <ThemeFloatingButton />
 
-                    <Router basename="/larabah-foods-demo">
+                    <Router basename="/">
                         <Routes>
                             {/* Redirect root to first CEO role page */}
                             <Route path="/" element={<Navigate to="/role/1/page/1" replace />} />
