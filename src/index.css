@@ -25,6 +25,9 @@
 /* 1. Modern Default (Clean Light) */
 :root,
 .theme-modern {
+    --brand-primary: #09253c;
+    --brand-secondary: #8bc53f;
+    
     --color-bg-main: 252 252 253;
     /* #fcfcfd */
     --color-bg-card: 255 255 255;

@@ -164,41 +164,54 @@ export default function GenericView({ role, page }: ViewProps) {
                 </div>
 
                 {/* Mobile/Tablet Card View (Replaces Horizontal Scroll) */}
-                <div className="lg:hidden flex flex-col divide-y divide-ui-border/50">
+                <div className="lg:hidden flex flex-col gap-4 p-4">
                     {mockData.map((row, i) => (
-                        <div key={`mobile-${i}`} className="p-5 flex flex-col gap-4 hover:bg-ui-surface transition-colors cursor-pointer group">
+                        <div
+                            key={`mobile-${i}`}
+                            className="bg-ui-card rounded-2xl border border-ui-border p-5 flex flex-col gap-4 hover:bg-ui-surface transition-all active:scale-[0.98] cursor-pointer group shadow-sm active:shadow-inner"
+                        >
                             <div className="flex justify-between items-start">
-                                <div>
-                                    <h4 className="font-bold text-lg text-ui-text group-hover:text-brand-secondary transition-colors mb-1">{row.id}</h4>
-                                    <span className="text-xs text-ui-muted font-medium">{row.date}</span>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-brand-secondary/10 flex items-center justify-center text-brand-secondary font-black border border-brand-secondary/20">
+                                        {row.id.slice(4)}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-extrabold text-ui-text group-hover:text-brand-secondary transition-colors leading-tight">{row.id}</h4>
+                                        <span className="text-[10px] text-ui-muted font-bold uppercase tracking-widest">{row.date}</span>
+                                    </div>
                                 </div>
-                                <span className={`px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-md border ${getStatusColor(row.status)}`}>
+                                <span className={`px-3 py-1 text-[10px] uppercase tracking-wider font-black rounded-full border shadow-sm ${getStatusColor(row.status)}`}>
                                     {row.status}
                                 </span>
                             </div>
 
-                            <div className="flex justify-between items-center bg-ui-surface/50 p-3 rounded-xl border border-ui-border">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-ui-surface border border-ui-border flex items-center justify-center text-[10px] font-bold text-brand-secondary shadow-sm">
-                                        {row.operator.charAt(0)}
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] font-bold text-ui-muted uppercase tracking-wider">Operator</span>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="bg-ui-surface/50 p-3 rounded-xl border border-ui-border/50">
+                                    <span className="text-[10px] font-bold text-ui-muted uppercase tracking-widest block mb-1">Operator</span>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-5 h-5 rounded-full bg-brand-secondary/20 flex items-center justify-center text-[8px] font-black text-brand-secondary border border-brand-secondary/30">
+                                            {row.operator.charAt(0)}
+                                        </div>
                                         <span className="text-xs font-bold text-ui-text">{row.operator}</span>
                                     </div>
                                 </div>
-                                <div className="flex flex-col items-end">
-                                    <span className="text-[10px] font-bold text-ui-muted uppercase tracking-wider">Metric Value</span>
+                                <div className="bg-ui-surface/50 p-3 rounded-xl border border-ui-border/50">
+                                    <span className="text-[10px] font-bold text-ui-muted uppercase tracking-widest block mb-1">Value</span>
                                     <span className="text-sm font-black text-ui-text">{row.value}</span>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                                <span className="text-[10px] font-bold text-ui-muted uppercase tracking-wider w-16">Progress</span>
-                                <div className="flex-1 h-2 bg-ui-surface rounded-full overflow-hidden border border-ui-border shadow-inner">
-                                    <div className="h-full bg-brand-secondary transition-all" style={{ width: `${row.progress}%` }}></div>
+                            <div className="flex flex-col gap-2">
+                                <div className="flex justify-between items-center text-[10px] font-bold text-ui-muted uppercase tracking-widest">
+                                    <span>Completion Progress</span>
+                                    <span className="text-brand-secondary">{row.progress}%</span>
                                 </div>
-                                <span className="text-xs font-black text-ui-text w-8 text-right">{row.progress}%</span>
+                                <div className="h-2 bg-ui-surface rounded-full overflow-hidden border border-ui-border shadow-inner">
+                                    <div
+                                        className="h-full bg-gradient-to-r from-brand-secondary to-brand-accent transition-all duration-1000"
+                                        style={{ width: `${row.progress}%` }}
+                                    ></div>
+                                </div>
                             </div>
                         </div>
                     ))}

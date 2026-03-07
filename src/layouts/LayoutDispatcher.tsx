@@ -12,6 +12,9 @@ const DataDenseLayout = lazy(() => import('./Dashboard/DataDenseLayout'));
 const ChristmasFestiveLayout = lazy(() => import('./Christmas/ChristmasFestiveLayout'));
 const RamadanFestiveLayout = lazy(() => import('./Ramadan/RamadanFestiveLayout'));
 
+const MobileLayout = lazy(() => import('./MobileLayout'));
+const TabletLayout = lazy(() => import('./TabletLayout'));
+
 // Premium Loader Component
 const LayoutLoader = () => (
     <div className="fixed inset-0 bg-[#09253c] flex items-center justify-center z-[9999]">
@@ -23,9 +26,18 @@ const LayoutLoader = () => (
 );
 
 export default function LayoutDispatcher() {
-    const { activeTheme } = useDesignSystem();
+    const { activeTheme, device } = useDesignSystem();
 
     const renderLayout = () => {
+        // Device-First Routing: Mobile and Tablet get dedicated high-end layouts
+        if (device === 'mobile') {
+            return <MobileLayout />;
+        }
+        if (device === 'tablet') {
+            return <TabletLayout />;
+        }
+
+        // Desktop falls back to theme-specific 9-topology system
         switch (activeTheme) {
             case 'theme-modern':
                 return <ModernLayout />;
@@ -56,4 +68,3 @@ export default function LayoutDispatcher() {
         </Suspense>
     );
 }
-

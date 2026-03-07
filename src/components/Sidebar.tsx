@@ -71,23 +71,33 @@ export default function Sidebar() {
 
                     {/* Shared Navigation */}
                     <div>
-                        <h3 className="px-3 text-xs font-semibold text-ui-muted uppercase tracking-wider mb-2">Shared Modules</h3>
-                        <nav className="space-y-1">
+                        <h3 className="px-3 text-[10px] font-bold text-ui-muted uppercase tracking-[0.2em] mb-3 opacity-50">Shared Modules</h3>
+                        <nav className="space-y-1.5">
                             {roleSharedPages.map(page => (
                                 <NavLink
                                     key={`shared-${page.id}`}
                                     to={`/role/${currentRoleId}/page/${page.id}`}
                                     className={({ isActive }) =>
-                                        `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${isActive
-                                            ? 'bg-ui-surface text-ui-text shadow-sm border border-ui-border font-bold'
-                                            : 'text-ui-muted hover:bg-ui-card hover:text-ui-text border border-transparent font-medium'
+                                        `flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group relative overflow-hidden ${isActive
+                                            ? 'text-brand-primary font-bold'
+                                            : 'text-ui-muted hover:text-ui-text hover:bg-white/5'
                                         }`
                                     }
                                 >
-                                    <span className="opacity-80 group-hover:opacity-100 group-[.active]:text-brand-accent transition-all">
-                                        {renderIcon(page.icon)}
-                                    </span>
-                                    <span className="text-sm truncate">{page.title}</span>
+                                    {({ isActive }) => (
+                                        <>
+                                            {isActive && (
+                                                <div className="absolute inset-0 bg-brand-secondary/90 shadow-[0_0_20px_rgba(139,197,63,0.3)] animate-in fade-in zoom-in-95 duration-300" />
+                                            )}
+                                            <span className={`relative z-10 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-brand-primary' : 'group-hover:text-brand-secondary'}`}>
+                                                {renderIcon(page.icon)}
+                                            </span>
+                                            <span className="relative z-10 text-sm tracking-tight truncate">{page.title}</span>
+                                            {isActive && (
+                                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-brand-primary rounded-l-full shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
+                                            )}
+                                        </>
+                                    )}
                                 </NavLink>
                             ))}
                         </nav>
@@ -95,29 +105,40 @@ export default function Sidebar() {
 
                     {/* Exclusive Navigation */}
                     <div>
-                        <h3 className="px-3 text-xs font-semibold text-brand-accent uppercase tracking-wider mb-2">
-                            {activeRole?.name === 'System Admin' ? 'Admin Tools' : 'Exclusive Tools'}
+                        <h3 className="px-3 text-[10px] font-bold text-brand-secondary uppercase tracking-[0.2em] mb-3 opacity-80">
+                            {activeRole?.name === 'System Admin' ? 'Governance' : 'Exclusive Tools'}
                         </h3>
-                        <nav className="space-y-1">
+                        <nav className="space-y-1.5">
                             {roleExclusivePages.map(page => (
                                 <NavLink
                                     key={`exclusive-${page.id}`}
                                     to={`/role/${currentRoleId}/page/${page.id}`}
                                     className={({ isActive }) =>
-                                        `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${isActive
-                                            ? 'bg-ui-surface text-ui-text shadow-sm border border-ui-border font-bold'
-                                            : 'text-ui-muted hover:bg-ui-card hover:text-ui-text border border-transparent font-medium'
+                                        `flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group relative overflow-hidden ${isActive
+                                            ? 'text-brand-primary font-bold'
+                                            : 'text-ui-muted hover:text-ui-text hover:bg-white/5'
                                         }`
                                     }
                                 >
-                                    <span className="opacity-80 group-hover:opacity-100 group-[.active]:text-brand-accent transition-all">
-                                        {renderIcon(page.icon)}
-                                    </span>
-                                    <span className="text-sm truncate">{page.title}</span>
+                                    {({ isActive }) => (
+                                        <>
+                                            {isActive && (
+                                                <div className="absolute inset-0 bg-brand-secondary/90 shadow-[0_0_20px_rgba(139,197,63,0.3)] animate-in fade-in zoom-in-95 duration-300" />
+                                            )}
+                                            <span className={`relative z-10 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-brand-primary' : 'group-hover:text-brand-secondary'}`}>
+                                                {renderIcon(page.icon)}
+                                            </span>
+                                            <span className="relative z-10 text-sm tracking-tight truncate">{page.title}</span>
+                                            {isActive && (
+                                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-brand-primary rounded-l-full shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
+                                            )}
+                                        </>
+                                    )}
                                 </NavLink>
                             ))}
                         </nav>
                     </div>
+
                 </div>
 
                 {/* Interactive User Switcher / Footer */}
